@@ -42,6 +42,9 @@ class App extends Component {
         columnOrder: reOrderColumn,
       }
 
+    // to get prevState every time for the rollback.
+    const prevState = this.state;
+
       this.setState(newState);
       return;
 
@@ -77,7 +80,9 @@ class App extends Component {
         },
   
       }
-  
+      // to get prevState every time for the rollback.
+      const prevState = this.state;
+
       this.setState(newData);
       return;
     } 
@@ -109,9 +114,20 @@ class App extends Component {
         }
     }
 
+    // to get prevState every time for the rollback.
+    const prevState = this.state;
+
     this.setState(newState);
+
+   setTimeout(function() {this.setState(prevState)}.bind(this), 3000);
     return;
   };
+
+  timer(prevState){
+    console.log("im here");
+    this.setState(prevState);
+  }
+
 
   render() {
     return (
